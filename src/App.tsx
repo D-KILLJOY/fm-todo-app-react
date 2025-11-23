@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
+import moon from "./assets/images/icon-moon.svg";
+import sun from "./assets/images/icon-sun.svg";
 // import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 type Theme = "light" | "dark";
@@ -88,10 +90,7 @@ function App() {
                                 className="theme__btn"
                                 onClick={themeToggle}
                             >
-                                <img
-                                    src="src/assets/images/icon-sun.svg"
-                                    alt="sun"
-                                />
+                                <img src={sun} alt="sun" />
                             </button>
                         )}
                         {theme === "light" && (
@@ -99,10 +98,7 @@ function App() {
                                 className="theme__btn"
                                 onClick={themeToggle}
                             >
-                                <img
-                                    src="src/assets/images/icon-moon.svg"
-                                    alt="moon"
-                                />
+                                <img src={moon} alt="moon" />
                             </button>
                         )}
                     </div>
