@@ -18,7 +18,8 @@
     font-size: 62.5%;
 
     --blue500: hsl(220, 98%, 61%);
-    --check-bg: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    --light-blue: hsl(192, 100%, 67%);
+    --pink: hsl(280, 87%, 65%);
     --white: #fff;
 }
 
@@ -144,14 +145,13 @@ img {
     inset: 0;
     padding: 0.03rem;
     border-radius: 50%;
-    background: var(--check-bg);
+    background: linear-gradient(120deg, var(--light-blue), var(--pink));
     mask-image: linear-gradient(var(--white) 0 0),
         linear-gradient(var(--white) 0 0);
     mask-origin: content-box, border-box;
     mask-clip: content-box, border-box;
     mask-composite: exclude;
     -webkit-mask-composite: xor;
-    mask-composite: exclude;
 }
 
 /* ! TO-DO MAIN */
@@ -174,9 +174,9 @@ img {
     content: "";
     position: absolute;
     inset: 0;
-    padding: 0.3px;
+    padding: 0.03rem;
     border-radius: 50%;
-    background: var(--check-bg);
+    background: linear-gradient(120deg, var(--light-blue), var(--pink));
     mask-image: linear-gradient(var(--white) 0 0),
         linear-gradient(var(--white) 0 0);
     mask-origin: content-box, border-box;
@@ -187,7 +187,7 @@ img {
 }
 
 .check:hover::before {
-    padding: 1.5px;
+    padding: 0.15rem;
 }
 
 .check img {
@@ -203,7 +203,7 @@ img {
     font-size: 1.4rem;
     text-align: center;
     padding: 2rem 1.8rem 2.8rem 2rem;
-    border-block-end: 1px solid var(--color-three);
+    border-block-end: 0.1rem solid var(--color-three);
 }
 
 .list__item,
@@ -227,7 +227,7 @@ img {
     width: 100%;
     background-color: var(--background-color-two);
     border-radius: 0.7rem;
-    margin-top: 2rem;
+    margin-block-start: 2rem;
     color: var(--color-one);
 }
 
@@ -259,7 +259,7 @@ img {
     display: flex;
     padding: 2rem 0;
     background-color: var(--background-color-two);
-    margin-top: 2rem;
+    margin-block-start: 2rem;
     border-radius: 0.6rem;
     justify-content: center;
     gap: 4rem;
@@ -285,8 +285,7 @@ img {
     text-align: center;
     font-size: 1.5rem;
     color: var(--color-two);
-    position: relative;
-    top: -5rem;
+    margin: 4rem auto;
 }
 
 .attribution {
@@ -307,11 +306,7 @@ img {
 }
 
 .done .check {
-    background: linear-gradient(
-        120deg,
-        hsl(192, 100%, 67%),
-        hsl(280, 87%, 65%)
-    );
+    background: linear-gradient(120deg, var(--light-blue), var(--pink));
     border: none;
 }
 
@@ -329,7 +324,7 @@ img {
     }
 
     .bg__only .filter {
-        margin-top: 0;
+        margin-block-start: 0;
     }
 
     .list__item {

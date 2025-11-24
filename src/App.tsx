@@ -285,24 +285,24 @@ function App() {
                         </li>
                     </ul>
                 </section>
+
+                <p className="drag__text">Drag and drop to reorder list</p>
+
+                <div className="attribution">
+                    Challenge by{" "}
+                    <a
+                        href="https://www.frontendmentor.io?ref=challenge"
+                        target="_blank"
+                    >
+                        Frontend Mentor
+                    </a>
+                    . Coded by{" "}
+                    <a href="https://linktr.ee/didiauche" target="_blank">
+                        Didia Uchenna
+                    </a>
+                    .
+                </div>
             </main>
-
-            <p className="drag__text">Drag and drop to reorder list</p>
-
-            <div className="attribution">
-                Challenge by{" "}
-                <a
-                    href="https://www.frontendmentor.io?ref=challenge"
-                    target="_blank"
-                >
-                    Frontend Mentor
-                </a>
-                . Coded by{" "}
-                <a href="https://linktr.ee/didiauche" target="_blank">
-                    Didia Uchenna
-                </a>
-                .
-            </div>
         </>
     );
 }
