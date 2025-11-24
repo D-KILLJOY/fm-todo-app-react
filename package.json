@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
+    "@types/react-beautiful-dnd": "^13.1.8",
     "nanoid": "^5.1.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"

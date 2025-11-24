@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import moon from "./assets/images/icon-moon.svg";
 import sun from "./assets/images/icon-sun.svg";
-// import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import cross from "./assets/images/icon-cross.svg";
+import check from "./assets/images/icon-check.svg";
+import {
+    DragDropContext,
+    Droppable,
+    Draggable,
+    type DropResult,
+} from "@hello-pangea/dnd";
 
 type Theme = "light" | "dark";
 type TodoItm = {
@@ -79,6 +86,15 @@ function App() {
         localStorage.setItem("todoItems", JSON.stringify(todoItem));
     }, [todoItem]);
 
+    function handleDragEnd(result: DropResult) {
+        if (!result.destination) return;
+        const newItems = Array.from(todoItem);
+        const [reorderedItems] = newItems.splice(result.source.index, 1);
+        newItems.splice(result.destination.index, 0, reorderedItems);
+
+        setTodoItem(newItems);
+    }
+
     return (
         <>
             <header className="header">
@@ -87,6 +103,7 @@ function App() {
                     <div className="theme">
                         {theme === "dark" && (
                             <button
+                                type="button"
                                 className="theme__btn"
                                 onClick={themeToggle}
                             >
@@ -95,6 +112,7 @@ function App() {
                         )}
                         {theme === "light" && (
                             <button
+                                type="button"
                                 className="theme__btn"
                                 onClick={themeToggle}
                             >
@@ -113,48 +131,83 @@ function App() {
                         name="todo"
                     />
                     <div className="input__circle"></div>
+                    <button type="submit" hidden aria-hidden="true"></button>
                 </form>
                 <section className="todo__main">
                     <div className="todo__list">
-                        <ul className="todo__ul">
-                            {todoItem.length > 0 ? (
-                                filteredItems.map((item) => (
-                                    <li
-                                        className={`${
-                                            item.completed ? "done" : ""
-                                        } list__item`}
-                                        key={item.id}
+                        <DragDropContext onDragEnd={handleDragEnd}>
+                            <Droppable droppableId="todoItems">
+                                {(provided) => (
+                                    <ul
+                                        className="todo__ul"
+                                        {...provided.droppableProps}
+                                        ref={provided.innerRef}
                                     >
-                                        <span
-                                            className="check"
-                                            onClick={() => actTgl(item.id)}
-                                        >
-                                            <img
-                                                src="src/assets/images/icon-check.svg"
-                                                alt="tick"
-                                            />
-                                        </span>
-                                        <span className="text">
-                                            {" "}
-                                            {item.text}
-                                        </span>
-                                        <span
-                                            className="cross"
-                                            onClick={() => delItem(item.id)}
-                                        >
-                                            <img
-                                                src="src/assets/images/icon-cross.svg"
-                                                alt=""
-                                            />
-                                        </span>
-                                    </li>
-                                ))
-                            ) : (
-                                <li className="empty__list">
-                                    Your List is empty
-                                </li>
-                            )}
-                        </ul>
+                                        {todoItem.length > 0 ? (
+                                            filteredItems.map((item, index) => (
+                                                <Draggable
+                                                    key={item.id}
+                                                    draggableId={item.id}
+                                                    index={index}
+                                                >
+                                                    {(provided) => (
+                                                        <li
+                                                            ref={
+                                                                provided.innerRef
+                                                            }
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            className={`${
+                                                                item.completed
+                                                                    ? "done"
+                                                                    : ""
+                                                            } list__item`}
+                                                        >
+                                                            <span
+                                                                className="check"
+                                                                onClick={() =>
+                                                                    actTgl(
+                                                                        item.id
+                                                                    )
+                                                                }
+                                                            >
+                                                                <img
+                                                                    src={check}
+                                                                    alt="tick"
+                                                                />
+                                                            </span>
+                                                            <span className="text">
+                                                                {" "}
+                                                                {item.text}
+                                                            </span>
+                                                            <span
+                                                                className="cross"
+                                                                onClick={() =>
+                                                                    delItem(
+                                                                        item.id
+                                                                    )
+                                                                }
+                                                            >
+                                                                <img
+                                                                    src={cross}
+                                                                    alt=""
+                                                                />
+                                                            </span>
+                                                        </li>
+                                                    )}
+                                                </Draggable>
+                                            ))
+                                        ) : (
+                                            <li className="empty__list">
+                                                Your List is empty
+                                            </li>
+                                        )}
+                                        {provided.placeholder}
+                                    </ul>
+                                )}
+                            </Droppable>
+                        </DragDropContext>
+
                         <div className="details">
                             <p>
                                 <span className="item__count">
@@ -237,14 +290,14 @@ function App() {
             <p className="drag__text">Drag and drop to reorder list</p>
 
             <div className="attribution">
-                Challenge by
+                Challenge by{" "}
                 <a
                     href="https://www.frontendmentor.io?ref=challenge"
                     target="_blank"
                 >
                     Frontend Mentor
                 </a>
-                . Coded by
+                . Coded by{" "}
                 <a href="https://linktr.ee/didiauche" target="_blank">
                     Didia Uchenna
                 </a>

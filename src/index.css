@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "Josefin-sans";
+    font-family: "Josefin Sans";
     src: url(./assets/Josefin_Sans/JosefinSans-VariableFont_wght.ttf)
         format("truetype");
     font-weight: 100 900;
@@ -11,7 +11,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: var(--font);
-    font-family: "Josefin-sans";
+    font-family: "Josefin Sans", sans-serif;
 }
 
 :root {
@@ -19,6 +19,7 @@
 
     --blue500: hsl(220, 98%, 61%);
     --check-bg: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    --white: #fff;
 }
 
 [data-theme="dark"] {
@@ -80,6 +81,12 @@ img {
     transition: 1s;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none;
+    }
+}
+
 .header__nav {
     padding: 5rem 0 0;
     display: flex;
@@ -90,7 +97,7 @@ img {
 .logo {
     font-size: 2.6rem;
     letter-spacing: 1rem;
-    color: #fff;
+    color: var(--white);
 }
 
 .theme__btn {
@@ -128,16 +135,22 @@ img {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
+    background-color: var(--white);
 }
 
 .input__circle::before {
     content: "";
     position: absolute;
     inset: 0;
-    padding: 0.3px;
+    padding: 0.03rem;
     border-radius: 50%;
     background: var(--check-bg);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-image: linear-gradient(var(--white) 0 0),
+        linear-gradient(var(--white) 0 0);
+    mask-origin: content-box, border-box;
+    mask-clip: content-box, border-box;
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
     mask-composite: exclude;
 }
 
@@ -164,7 +177,12 @@ img {
     padding: 0.3px;
     border-radius: 50%;
     background: var(--check-bg);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-image: linear-gradient(var(--white) 0 0),
+        linear-gradient(var(--white) 0 0);
+    mask-origin: content-box, border-box;
+    mask-clip: content-box, border-box;
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
     mask-composite: exclude;
 }
 
@@ -185,7 +203,7 @@ img {
     font-size: 1.4rem;
     text-align: center;
     padding: 2rem 1.8rem 2.8rem 2rem;
-    border-bottom: 1px solid var(--color-three);
+    border-block-end: 1px solid var(--color-three);
 }
 
 .list__item,
@@ -195,7 +213,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding-right: 2rem;
+    padding-inline-end: 2rem;
 }
 
 .list__item {
@@ -215,12 +233,12 @@ img {
 
 .cross {
     width: 1.3rem;
-    margin-left: auto;
+    margin-inline-start: auto;
     cursor: pointer;
 }
 
 .text {
-    margin-left: 2rem;
+    margin-inline-start: 2rem;
     cursor: pointer;
 }
 
@@ -243,7 +261,6 @@ img {
     background-color: var(--background-color-two);
     margin-top: 2rem;
     border-radius: 0.6rem;
-    display: flex;
     justify-content: center;
     gap: 4rem;
 }
@@ -258,10 +275,6 @@ img {
 
 .filter__nav:hover {
     color: var(--color-one);
-}
-
-.selected {
-    color: var(--blue500);
 }
 
 .selected {
@@ -283,7 +296,7 @@ img {
 }
 
 .attribution a {
-    color: var(--Bright-Blue);
+    color: var(--blue500);
     font-weight: 700;
     text-decoration: none;
 }
@@ -302,7 +315,7 @@ img {
     border: none;
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 45rem) {
     .bg__only {
         display: block;
     }
@@ -319,6 +332,11 @@ img {
         margin-top: 0;
     }
 
+    .list__item {
+        font-size: 1.4rem;
+        padding: 3rem 1.8rem 3rem 3rem;
+    }
+
     .list__item:hover {
         font-weight: 700;
     }
@@ -326,14 +344,9 @@ img {
     .list__item:hover .cross {
         opacity: 1;
     }
-
-    .list__item {
-        font-size: 1.4rem;
-        padding: 3rem 1.8rem 3rem 3rem;
-    }
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 80rem) {
     .cross {
         opacity: 0;
     }
