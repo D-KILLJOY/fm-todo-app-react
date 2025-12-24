@@ -146,8 +146,8 @@ img {
     padding: 0.03rem;
     border-radius: 50%;
     background: linear-gradient(120deg, var(--light-blue), var(--pink));
-    mask-image: linear-gradient(var(--white) 0 0),
-        linear-gradient(var(--white) 0 0);
+    mask-image:
+        linear-gradient(var(--white) 0 0), linear-gradient(var(--white) 0 0);
     mask-origin: content-box, border-box;
     mask-clip: content-box, border-box;
     mask-composite: exclude;
@@ -177,8 +177,8 @@ img {
     padding: 0.03rem;
     border-radius: 50%;
     background: linear-gradient(120deg, var(--light-blue), var(--pink));
-    mask-image: linear-gradient(var(--white) 0 0),
-        linear-gradient(var(--white) 0 0);
+    mask-image:
+        linear-gradient(var(--white) 0 0), linear-gradient(var(--white) 0 0);
     mask-origin: content-box, border-box;
     mask-clip: content-box, border-box;
     mask-composite: exclude;
@@ -310,6 +310,10 @@ img {
 }
 
 @media screen and (min-width: 45rem) {
+    .header {
+        background: var(--bg-img-dsk) center/cover no-repeat;
+    }
+
     .bg__only {
         display: block;
     }
